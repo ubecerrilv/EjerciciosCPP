@@ -19,9 +19,9 @@ namespace obtener{
     /******************************************************************
      *      FUNCIONES PARA OBTENER DATOS DE LA ENTRADA ESTÁNDAR
     ******************************************************************/
-    /*
-     * Función para recuperar un int desde la entrada estándar
-     * no recibe parámtros y regresa un int cuando es válido
+    
+    /* Función para recuperar un int desde la entrada estándar
+     * no recibe parámetros y regresa un int cuando es válido
      * mientras el valor ingresado por el usuario no sea un int
      * muestra mensaje de error y pide que se ingrese de nuevo. 
     */
@@ -46,12 +46,10 @@ namespace obtener{
         return atoi(cadena.c_str());    //Es necesario pasar a cadena c para la conversión
     }//Fin obtenerInt
 
-    /*
-     * Función para recuperar un caracter desde la entrada estándar
+    /*Función para recuperar un caracter desde la entrada estándar
      * no recibe parámtros y regresa un caracter cuando es válido
      * mientras el valor ingresado por el usuario no sea un caracter
-     * muestra mensaje de error y pide que se ingrese de nuevo.
-    */
+     * muestra mensaje de error y pide que se ingrese de nuevo.*/
     char obtenerChar (void){
         //Variables auxiliares para a obtención del char
         bool noChar = true;
@@ -70,12 +68,10 @@ namespace obtener{
         return cadena.at(0);
     }
 
-    /*
-     * Función para recuperar un punto flotante desde la entrada estándar
+    /*Función para recuperar un punto flotante desde la entrada estándar
      * no recibe parámtros y regresa un punto flotante cuando es válido
      * mientras el valor ingresado por el usuario no sea un punto flotante
-     * muestra mensaje de error y pide que se ingrese de nuevo. 
-    */
+     * muestra mensaje de error y pide que se ingrese de nuevo.*/
     double obtenerDouble (void){
         //Variables auxiliares para la validación
         bool noDouble = true;
@@ -96,11 +92,10 @@ namespace obtener{
     /******************************************************************
      *      FUNCIONES PARA VALIDAR DATOS DE LA ENTRADA ESTÁNDAR
     ******************************************************************/
-    /*
-    *Funcion para validar si un valor introucido es un int valido
+    
+    /*Funcion para validar si un valor introucido es un int valido
     *recibe un string y retorna un valor verdadero si es un int válido
-    *retorna falso en caso contrario. 
-    */
+    *retorna falso en caso contrario.*/
     bool esIntValido(string& cadena){
         //Si la cadena está vacía se regresa falso
         if (int(cadena.length())==0) return false;
@@ -127,20 +122,16 @@ namespace obtener{
         return true;
     }//Fin esIntValido
 
-    /*
-    *Funcion para validar si un valor introucido es un caracter valido
+    /*Funcion para validar si un valor introucido es un caracter valido
     *recibe un string y retorna un valor verdadero si es un caracter
-    *(un solo caraceter) retorna falso en caso contrario. 
-    */
+    *(un solo caraceter) retorna falso en caso contrario.*/
     bool esCharValido(string& cadena){
         return cadena.length() == 1;
-    }
+    }//Fin esCharValido
 
-    /*
-    *Funcion para validar si un valor introucido es un punto flotante valido
+    /*Funcion para validar si un valor introucido es un punto flotante valido
     *recibe un string y retorna un valor verdadero si es un punto flotante válido
-    *retorna falso en caso contrario. 
-    */
+    *retorna falso en caso contrario.*/
     bool esDoubleValido(string& cadena){
         //Si la cadena está vacía regresar falso
         if(cadena.length()==0) return false;
@@ -172,7 +163,10 @@ namespace obtener{
     /******************************************************************
      *      FUNCIONES PARA MANDAR DATOS A LA SALIDA ESTÁNDAR
     ******************************************************************/
+
+    /*Función para mostrar el mansaje pasado como parámetro junto con un salto
+    *de línea.*/
     void mostrarMensaje(string mensaje){
         cout<<mensaje<<endl;
-    }
+    }//Fin mostrarMensaje
 }//Fin nombre de espacios validar

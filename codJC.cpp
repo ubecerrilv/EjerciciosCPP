@@ -26,7 +26,7 @@ int main(){
 string codifica (string& cad, int desplazamiento){
     string nueva = cad;
     for(int i = 0; i<cad.length();i++){
-        nueva[i] = char(int(cad[i])+3);
+        if(cad[i]!=' ') nueva[i] = char(int(cad[i])+3);
     }
 
     return nueva;
