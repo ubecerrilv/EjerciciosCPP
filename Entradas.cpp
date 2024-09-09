@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<fstream>
 
 using namespace std;
 
@@ -20,11 +21,17 @@ namespace obtener{
      *      FUNCIONES PARA OBTENER DATOS DE LA ENTRADA ESTÁNDAR
     ******************************************************************/
     
+    /*Función para recuperar una cadena desde la entrada estándar*/
+    string obtenerCad(void){
+        string res;
+        getline (cin, res);
+        return res;
+    }
+
     /* Función para recuperar un int desde la entrada estándar
      * no recibe parámetros y regresa un int cuando es válido
      * mientras el valor ingresado por el usuario no sea un int
-     * muestra mensaje de error y pide que se ingrese de nuevo. 
-    */
+     * muestra mensaje de error y pide que se ingrese de nuevo.*/
     int obtenerInt(void){
         //Variables auxiliares para la obtención del int
         bool noInt=true;
@@ -170,3 +177,86 @@ namespace obtener{
         cout<<mensaje<<endl;
     }//Fin mostrarMensaje
 }//Fin nombre de espacios validar
+
+//Espacio de nombres para recuperar archivos
+namespace archivos{
+    using namespace obtener;
+
+    /*Función para poder abrir un archivo en modo lectura, mientras el archivo no pueda ser abierto
+    *pide un nuevo nombre
+
+    *@return objeto con la conexión al archivo en modo lectura*/
+    
+    ifstream abrirLectura(void){
+        ifstream res;
+        bool noAbierto = true;
+        string archivoNom;
+        
+        //Abrir archivo de entrada
+        while(noAbierto){
+            try{
+                mostrarMensaje("Ingresa el nombre del archivo a codificar (ruta completa): ");
+                getline(cin, archivoNom);
+
+                res.open(archivoNom);
+                if (res.fail()) throw archivoNom;
+            }catch(string e)    
+            {
+                mostrarMensaje("Archivo con el nombre \""+e+"\" no pudo ser abierto, verifica su nombre o existencia: ");
+                continue;
+            }
+            //Archivo abierto
+            noAbierto = false;
+        }
+
+        return res;
+    }
+
+    /*Función para poder abrir un archivo para escritura
+    *si hay un archivo existente con ese nombre advierte al usuario de la 
+    *sobrescritura
+
+    *@return objeto con la conexión al archivo en modo escritura*/
+    
+    ofstream abrirEscritura(void){
+        ifstream aux;
+        ofstream res;
+
+        string salidaNom;
+
+        //Verificar su existencia para podfer advertir al usuario de su sobrescritura.
+        bool noExiste = true;
+        while (noExiste){
+            mostrarMensaje("Ingresa el nombre del archivo de salida, este será almacenado en el directoio actual: ");
+            getline(cin, salidaNom);
+
+            aux.open(salidaNom);
+
+            //Preguntar si se sobrescribe
+            if(!aux.fail()){
+                mostrarMensaje("El archivo ya existe. ¿Sobrescribirlo? (s/n)");
+                char respuesta = obtenerChar();
+
+                switch (respuesta){
+                    case 'n':
+                        aux.close();
+                        continue;
+
+                    default:
+                        aux.close();
+                        noExiste = false;
+                        break;
+                }
+            }
+
+            //Si no existe no es necesario preguntar por sobrescritura
+            noExiste = false;
+    }//Fin while sobrescritura
+
+    //Abrir archivo para escritura
+    res.open(salidaNom);
+
+    //Regresar el objeto
+    return res;
+    }
+}

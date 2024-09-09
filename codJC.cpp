@@ -25,9 +25,21 @@ int main(){
 
 string codifica (string& cad, int desplazamiento){
     string nueva = cad;
-    for(int i = 0; i<cad.length();i++){
-        if(cad[i]!=' ') nueva[i] = char(int(cad[i])+3);
-    }
+    int base = int('A');
+    int limite = int('z');
+    int actual=0;
 
+    for(int i = 0; i<cad.length();i++){
+        //Variable auxiliar para realizar desplazamiento
+        actual = int(cad[i]);
+
+        if(cad[i]!=' ' && !ispunct(cad[i])){
+            if((actual+desplazamiento)>limite){
+                nueva[i] = char(actual-26+desplazamiento);
+            }else{
+                nueva[i] = char(actual+desplazamiento);
+            }
+        }
+    }
     return nueva;
-}
+}//Fin codifica
